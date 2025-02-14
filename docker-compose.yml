@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  mr-review:
+    image: rjamal/mr-review
+    container_name: mr-review
+    restart: unless-stopped
+    environment:
+      - GITLAB_SECRET_TOKEN=${GITLAB_SECRET_TOKEN}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - WEAVIATE_URL=${WEAVIATE_URL}
+      - WEAVIATE_API_KEY=${WEAVIATE_API_KEY}
+      - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - mr-review-network
+
+networks:
+  mr-review-network:
+    driver: bridge
